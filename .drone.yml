@@ -8,7 +8,7 @@ workspace:
   path: "src/github.com/blake/external-mdns"
 
 platform:
-  arch: arm64
+  arch: amd64
 
 steps:
   - name: build
