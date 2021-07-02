@@ -134,10 +134,11 @@ func (i *IngressSource) buildRecords(obj interface{}, action string) ([]resource
 			hostname = parsedHost.Domain
 		}
 		advertiseObj := resource.Resource{
-			Action:    action,
-			Name:      hostname,
-			Namespace: ingress.Namespace,
-			IP:        ipField,
+			SourceType: "ingress",
+			Action:     action,
+			Name:       hostname,
+			Namespace:  ingress.Namespace,
+			IP:         ipField,
 		}
 
 		records = append(records, advertiseObj)

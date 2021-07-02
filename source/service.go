@@ -82,7 +82,8 @@ func (s *ServiceSource) onUpdate(oldObj interface{}, newObj interface{}) {
 func (s *ServiceSource) buildRecord(obj interface{}, action string) (resource.Resource, error) {
 
 	var advertiseObj = resource.Resource{
-		Action: action,
+		SourceType: "service",
+		Action:     action,
 	}
 
 	service, ok := obj.(*corev1.Service)

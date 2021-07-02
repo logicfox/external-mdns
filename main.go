@@ -101,10 +101,17 @@ func constructRecords(r resource.Resource) []string {
 	// Construct reverse IP
 	reverseIP := net.IPv4(ip[15], ip[14], ip[13], ip[12])
 
+	// Publish A records resources as <name>.<namespace>.local
+	// Ensure corresponding PTR records map to this hostname
 	records = append(records, fmt.Sprintf("%s.%s.local. %d IN A %s", r.Name, r.Namespace, recordTTL, ip))
 	records = append(records, fmt.Sprintf("%s.in-addr.arpa. %d IN PTR %s.%s.local.", reverseIP, recordTTL, r.Name, r.Namespace))
 
-	if r.Namespace == defaultNamespace || withoutNamespace {
+	// Publish services without the name in the namespace if any of the following
+	// criteria is satisfied:
+	// 1. The Service exists in the default namespace
+	// 2. The -without-namespace flag is equal to true
+	// 3. The record to be published is from an Ingress with a defined hostname
+	if r.Namespace == defaultNamespace || withoutNamespace || r.SourceType == "ingress" {
 		records = append(records, fmt.Sprintf("%s.local. %d IN A %s", r.Name, recordTTL, ip))
 	}
 
