@@ -18,4 +18,4 @@ jobs:
         repository: blake/external-mdns.git
         ref: master
     - name: Build the Docker image
-      run: docker buildx . --platform armhf --file Dockerfile --tag ghcr.io/logicfox/external-mdns:armhf-$(date +%s)
+      run: docker buildx build --platform armhf --file Dockerfile . --tag ghcr.io/logicfox/external-mdns:armhf-$(date +%s)
