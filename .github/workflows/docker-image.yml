@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        repository: https://github.com/blake/external-mdns.git
+        repository: blake/external-mdns.git
         ref: master
     - name: Build the Docker image
       run: docker buildx . --platform armhf --file Dockerfile --tag ghcr.io/logicfox/external-mdns:armhf-$(date +%s)
