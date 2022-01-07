@@ -12,7 +12,7 @@ ARG TARGETARCH
 
 ADD . /go/src/github.com/blake/external-mdns
 WORKDIR /go/src/github.com/blake/external-mdns
-
+RUN go get -v -d ./...
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} \
     go build \
     -ldflags="-s -w" \
