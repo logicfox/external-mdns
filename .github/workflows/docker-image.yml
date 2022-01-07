@@ -24,7 +24,7 @@ jobs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ secrets.GHCR_SECRET }}
     - name: Pull previous version
       run: docker pull ghcr.io/logicfox/external-mdns:test
     - name: Build the Docker image
